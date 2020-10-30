@@ -99,13 +99,13 @@ grouped_urchins<-cleaned_urchin_data %>%
   
   #group the urchins by site and year and present totals
   group_by(site_full,year) %>% 
-  summarize(total_urchins = n()) %>% 
+  summarize(total_urchins = n()) #%>% 
   
   #clean up the table
-  kable(col.names = c("Site",
-                      "Year",
-                      "Number of Urchins")) %>% 
-  kable_styling()
+  #kable(col.names = c("Site",
+                      #"Year",
+                      #"Number of Urchins")) %>% 
+  #kable_styling()
 
 
 #View the grouped urchins
@@ -113,6 +113,14 @@ grouped_urchins
 ```
 
 ```{r}
+#Graphing the grouped urchin data by site and year
+
+purple_urchins_by_site_plot<-grouped_urchins %>% 
+  ggplot(aes(x=year, y=total_urchins))+
+  geom_bar(stat="identity")+
+  facet_wrap(~site_full)
+
+purple_urchins_by_site_plot
 
 ```
 
