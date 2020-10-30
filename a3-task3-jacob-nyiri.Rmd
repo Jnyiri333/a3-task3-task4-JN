@@ -53,19 +53,66 @@ urchin_box
 ```{r}
 #rough summary statistics of the urchin data
 
+#Create summary table from urchin data
+#for each type of urchin
 urchin_summary<-cleaned_urchin_data %>% 
   group_by(common_name) %>% 
   summarize(mean = mean(size),
             median = median(size),
             std_dev = sd(size),
             sample_size = n()) %>% 
+  #clean up the appearance of the table
   kable(col.names = c("Common Name",
                       "Mean",
                       "Median", 
                       "Standard Deviation",
-                      "Sample size"))
+                      "Sample size")) %>% 
+  kable_styling()
   
+ #View the table 
 urchin_summary
 ```
 
+
+#First thoughts on the data
+
+The size distribution of the purple urchins appears to be skewed towards smaller sizes, with very few larger ones, while the red urchins appear much more normally distributed.
+
+The purple urchins in this sample were also 34% smaller than the red urchins on average.
+
+```{r}
+#beginning to explore counts by site and year
+
+#create subset of purple urchins, grouping by year and site
+
+grouped_urchins<-cleaned_urchin_data %>% 
+  filter(common_name == "Purple Urchin") %>% 
+  mutate(year = year(date)) %>% 
+  
+  #Create cleaner full-name column of site names
+  mutate(site_full = case_when(  
+    site=="NAPL"~"Naples Reef",
+    site == "CARP"~"Carpenteria Reef",
+    site == "AQUE"~"Arroyo Quemado Reef",
+    site == "MOHK"~"Mohawk Reef",  # YAY!
+    site == "IVEE" ~ "Isla Vista Reef")) %>% 
+  
+  #group the urchins by site and year and present totals
+  group_by(site_full,year) %>% 
+  summarize(total_urchins = n()) %>% 
+  
+  #clean up the table
+  kable(col.names = c("Site",
+                      "Year",
+                      "Number of Urchins")) %>% 
+  kable_styling()
+
+
+#View the grouped urchins
+grouped_urchins
+```
+
+```{r}
+
+```
 
