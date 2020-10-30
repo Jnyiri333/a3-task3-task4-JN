@@ -31,6 +31,8 @@ cleaned_urchin_data <-raw_urchin_data %>%
 #Beginning exploratory visualiztion
 #First comparing size distributions between red and pruple urchins
 
+
+#create histogram of sizedistributions by common name
 urchin_hist <-cleaned_urchin_data %>% 
   ggplot(aes(x=size)) +
   geom_histogram()+
@@ -38,5 +40,25 @@ facet_wrap(~common_name)
 
 urchin_hist
 
+#create boxplot of same distributions
+urchin_box<- cleaned_urchin_data %>% 
+  ggplot(aes(x=common_name, y=size))+
+  geom_boxplot()
+
+urchin_box
+
 ```
+
+```{r}
+#rough summary statistics of the urchin data
+
+urchin_summary<-cleaned_urchin_data %>% 
+  group_by(common_name) %>% 
+  summarize(mean = mean(size),
+            median = median(size),
+            std_dev = sd(size))
+
+urchin_summary
+```
+
 
