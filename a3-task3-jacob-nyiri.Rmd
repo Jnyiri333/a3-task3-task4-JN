@@ -5,7 +5,38 @@ date: "10/30/2020"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, echo=TRUE, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
+#initial data read-in and librarys
+library(tidyverse)
+library(here)
+library(janitor)
+library(lubridate)
+
+
+raw_urchin_data<-read_csv(here("Data","urchins.csv"))
+
+```
+
+```{r}
+#start to initially clean data
+cleaned_urchin_data <-raw_urchin_data %>% 
+  clean_names() %>% 
+  mutate(date=mdy(date))
+
+```
+
+```{r}
+#Beginning exploratory visualiztion
+#First comparing size distributions between red and pruple urchins
+
+urchin_hist <-cleaned_urchin_data %>% 
+  ggplot(aes(x=size)) +
+  geom_histogram()+
+facet_wrap(~common_name)
+
+urchin_hist
+
 ```
 
