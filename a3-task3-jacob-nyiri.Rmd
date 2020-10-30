@@ -13,6 +13,7 @@ library(tidyverse)
 library(here)
 library(janitor)
 library(lubridate)
+library(kableExtra)
 
 
 raw_urchin_data<-read_csv(here("Data","urchins.csv"))
@@ -56,8 +57,14 @@ urchin_summary<-cleaned_urchin_data %>%
   group_by(common_name) %>% 
   summarize(mean = mean(size),
             median = median(size),
-            std_dev = sd(size))
-
+            std_dev = sd(size),
+            sample_size = n()) %>% 
+  kable(col.names = c("Common Name",
+                      "Mean",
+                      "Median", 
+                      "Standard Deviation",
+                      "Sample size"))
+  
 urchin_summary
 ```
 
