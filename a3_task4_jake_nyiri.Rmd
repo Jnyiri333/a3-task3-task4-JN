@@ -23,11 +23,29 @@ raw_urchin_data <- read.csv(here("Data", "urchins.csv"))
 ```{r}
 #first clean up the dates and names
 
-cleaned_urchin_data <- raw_urchin_data %>% 
-  clean_names() %>% 
-  mutate(date=mdy(date)) %>% 
-  mutate(month=month(date)) %>% 
+cleaned_urchin_data <- raw_urchin_data %>%
+  clean_names() %>%
+  mutate(date=mdy(date)) %>%
+  mutate(month=month(date)) %>%
   mutate(year=year(date))
 
+```
+
+```{r}
+#Filtering data to obtain purple urchins from Naples Reef in Jan 2010
+
+naples_purple_urchins<-cleaned_urchin_data %>% 
+  filter(site == "NAPL" & common_name == "Purple Urchin" &
+           month == 1 & year == 2010) %>% 
+  group_by(treatment)
+
+#exploratory histogram of size ditributions across the treatments
+naples_plot<-naples_purple_urchins %>% 
+  ggplot(aes(x=size))+
+  geom_histogram(stat="bin")+
+  facet_wrap(~treatment)
+
+naples_plot
+  
 ```
 
