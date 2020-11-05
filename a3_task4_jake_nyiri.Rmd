@@ -1,0 +1,33 @@
+---
+title: "a3_task4_jake_nyiri"
+author: "Jake Nyiri"
+date: "11/4/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE, echo=TRUE, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+#load libraries and read-in raw urchin data
+
+library(tidyverse)
+library(here)
+library(lubridate)
+library(janitor)
+
+raw_urchin_data <- read.csv(here("Data", "urchins.csv"))
+
+```
+
+
+```{r}
+#first clean up the dates and names
+
+cleaned_urchin_data <- raw_urchin_data %>% 
+  clean_names() %>% 
+  mutate(date=mdy(date)) %>% 
+  mutate(month=month(date)) %>% 
+  mutate(year=year(date))
+
+```
+
