@@ -87,3 +87,6 @@ t.test(urchin_sizes_control,urchin_sizes_treatment)
   
 ```
 
+The two samples have means of ~3.9 and ~3.7 cm. They have similar standard deviations, both almost 1 cm (0.97 and 0.87). 
+
+Looking at our t-test results, our p-value of 0.25 indicates a 25% chance that, if these samples were taken from populations with the same mean size, we still could have drawn samples with means at least as different as this random. Therefore--although the p-value is just one part of an analysis--we cannot reject the null hypothesis that these samples are from populations with the same mean. We note the 95%confidence interval that the difference in means between these populations lies somewhere between -0.13 and 0.52, an interval which contains '0', also indicating that these could be form populations with the same mean.
