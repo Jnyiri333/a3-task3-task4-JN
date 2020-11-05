@@ -69,4 +69,21 @@ urchin_summary<-naples_purple_urchins %>%
 urchin_summary
 ```
 
-#Checking GIT blah
+
+```{r}
+#performing t-test on the sizes
+#first creating a vector of sizes to give the t-test
+
+urchin_sizes_control<-naples_purple_urchins %>%
+  filter(treatment == "ANNUAL") %>% 
+  pull(size)
+
+urchin_sizes_treatment <- naples_purple_urchins %>% 
+  filter(treatment == "CONTROL") %>% 
+  pull(size)
+
+# then do the actual test
+t.test(urchin_sizes_control,urchin_sizes_treatment)
+  
+```
+
