@@ -42,10 +42,30 @@ naples_purple_urchins<-cleaned_urchin_data %>%
 #exploratory histogram of size ditributions across the treatments
 naples_plot<-naples_purple_urchins %>% 
   ggplot(aes(x=size))+
-  geom_histogram(stat="bin")+
+  geom_histogram(stat="bin", bins=8)+
+  facet_wrap(~treatment)
+
+naples_QQ_plot<-naples_purple_urchins %>% 
+  ggplot(aes(sample=size))+
+  geom_qq()+
   facet_wrap(~treatment)
 
 naples_plot
-  
+
+naples_QQ_plot  
+```
+
+The distribution of sizes for both treatments is varied; the annual treatment appears to be bimodal and the control treatment appears more of a comb-type distribution. The angle of the QQ plot for the annual is closer to indicating a normal distribution than that of the control.
+
+```{r}
+#summary stats for the urchins by treatment
+#they've already been grouped
+urchin_summary<-naples_purple_urchins %>% 
+  summarize(
+    mean = mean(size),
+    SD = sd(size),
+    sample_size = n())
+
+urchin_summary
 ```
 
