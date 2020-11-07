@@ -6,7 +6,7 @@ output: html_document
 ---
 
 ```{r setup, echo=TRUE, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 #initial data read-in and librarys
 library(tidyverse)
